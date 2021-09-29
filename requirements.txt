@@ -1,0 +1,5 @@
+telethon
+cryptg
+dnspython
+pymongo
+requests

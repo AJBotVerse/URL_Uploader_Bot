@@ -1,0 +1,6 @@
+#Cache Files
+/bot/__pycache__/
+/bot/plugins/__pycache__/
+
+#Session File
+URL_Uploader.session
