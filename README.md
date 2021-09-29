@@ -21,4 +21,4 @@ Click Below Button to Deploy your Bot.
 
 <a href="http://t.me/AJPyroVerse"><img src="https://smartiblogster.com/wp-content/uploads/2021/03/smartiblogster-iblogster-join-telegram-channel.png" style="width: 300px; height: 100px"></a>
 
-<a href="http://t.me/AJPyroVerseGroup"><img src="https://www.pngitem.com/pimgs/m/214-2144731_groups-on-telegram-telegram-group-link-png-transparent.png" style="width: 280px; height: 80px; position: relative; left: 9px; border-radius: 8px"></a>
+<a href="http://t.me/AJPyroVerseGroup"><img src="https://www.pngitem.com/pimgs/m/214-2144731_groups-on-telegram-telegram-group-link-png-transparent.png" style="width: 280px; height: 80px; position: relative; left: 6px; border-radius: 8px"></a>
