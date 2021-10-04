@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-
 '''Impoting Libraries and Modules'''
 from bot.credentials import *
 from inspect import currentframe
@@ -9,6 +6,7 @@ from requests import head
 import __main__
 
 
+'''Defining Some Functions'''
 #Function to find error in which file and in which line
 def line_number():
     cf = currentframe()
@@ -28,3 +26,16 @@ async def length_of_file(url):
     except Exception as e:  #File is not Exist in Given URL
         print(e)
         return 'Not Valid'
+
+#Task Updating or Status Checking
+def task(status=None):
+    if status:
+        with open('task.txt', 'w') as newfile:
+            newfile.writelines([status])
+    else:
+        try:
+            with open('task.txt') as file:
+                return file.readlines()[0]
+        except FileNotFoundError:
+            return "No Task"
+

@@ -4,6 +4,7 @@
 '''Impoting Libraries, Modules & Credentials'''
 from telethon import events
 from telethon.sync import TelegramClient
+from os import remove
 from bot.plugins.downloader import *
 from bot.messages import *
 
@@ -27,24 +28,30 @@ async def help_handler(event):
 async def upload_handler(event):
 
     message_info = event.message
-    
-    if message_info.media and message_info.text:  #Verifying Url And File Media
-        url = message_info.text
-        downloader = await Downloader.start(event, url, bot)
-        filename = downloader.filename
 
-        if filename:    #Sending file to user
-            msg = downloader.n_msg
-            message = event.message
-            userid = event.sender_id
-            try:
-                await bot.send_file(userid , file = filename, reply_to = message)
-            except Exception as e:
-                await bot.delete_messages(None, msg)
-                await bot.send_message(userid, unsuccessful_upload, reply_to = message)
-                print(line_number(), e)
-            else:
-                await bot.delete_messages(None, msg)
+    if str(type(message_info.entities[0])) == "<class 'telethon.tl.types.MessageEntityUrl'>":
+        if task() == "Running":
+            await event.respond(task_ongoing, parse_mode = 'html')
+        else:
+            url = message_info.text
+            downloader = await Downloader.start(event, url, bot)
+            filename = downloader.filename
+
+            if filename:    #Sending file to user
+                msg = downloader.n_msg
+                message = event.message
+                userid = event.sender_id
+                try:
+                    await bot.send_file(userid , file = filename, reply_to = message)
+                except Exception as e:
+                    await bot.delete_messages(None, msg)
+                    await bot.send_message(userid, unsuccessful_upload, reply_to = message)
+                    print(line_number(), e)
+                else:
+                    await bot.delete_messages(None, msg)
+                finally:
+                    remove(filename)
+            task("No Task")
     return None
 
 
