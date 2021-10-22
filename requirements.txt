@@ -3,3 +3,4 @@ cryptg
 dnspython
 pymongo
 requests
+pySmartDL

@@ -10,6 +10,10 @@ help_msg = f"<i>To use me, Just Send me any direct downloading link, and I will 
 
 start_msg = f"<b>Hi, I am URL_UploaderBot Created by @AJPyroVerse and My Developer is @AJTimePyro.</b>\n{help_msg}"
 
+not_joined_community = f"<b>To use this bot, you need to Join our Channel and Group.</b>{common_text}"
+
+broadcast_failed = "<b>Broadcasting Message can`t be empty</b>"
+
 task_ongoing = "<u>One Task is already going on, So Please Try Again Later.</u>"
 
 processing_url = "<i>Please wait while I am Processing File</i>"
@@ -23,3 +27,4 @@ uploading_msg = "<b>File successfully downloaded to server, Now uploading to Dri
 file_limit = f"Send only those whose size is less than 400mb.{common_text}"
 
 youtube_url = "<b>Currently I do not support youtube videos.</b>"
+

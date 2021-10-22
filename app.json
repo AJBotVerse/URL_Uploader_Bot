@@ -23,6 +23,10 @@
         },
         "API_HASH" : {
             "description" : "Get From https://my.telegram.org"
+        },
+        "MONGO_STR" : {
+            "description" : "Leave it empty.",
+            "required" : false
         }
     },
     "stack" : "heroku-20",
