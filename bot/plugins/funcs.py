@@ -4,7 +4,7 @@
 """Importing"""
 # Importing External Packages
 from telethon import Button
-from telethon.tl.functions.channels import GetParticipantRequest
+from telethon.tl.functions.channels import EditCreatorRequest, GetParticipantRequest
 from telethon.errors import rpcerrorlist
 from pymongo import MongoClient
 from requests import head
@@ -36,6 +36,8 @@ async def search_user_in_community(event, bot):
     except rpcerrorlist.UserNotParticipantError:
         await event.respond(not_joined_community, parse_mode = 'html', buttons = [Button.url('Join our Channel.','https://t.me/AJPyroVerse'), Button.url('Join our Group.','https://t.me/AJPyroVerseGroup')])
         return
+    except rpcerrorlist.ChatAdminRequiredError:
+        return True
     except Exception as e:
         print(line_number(), e)
     else:
