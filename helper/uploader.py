@@ -7,7 +7,7 @@ from helper.importCommon import *
 
 # Importing Inbuilt Packages
 from os import remove
-from time import time
+from time import time, sleep
 
 
 class Upload:
@@ -38,6 +38,7 @@ class Upload:
                 speed = 0.01
             remaining = int((((total - current)/1024)/1024)/speed)
             self.bot.loop.create_task(editMessage(progress_bar, percentage, completed, speed, remaining))
+            sleep(3)
 
         try:
             global t1
