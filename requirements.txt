@@ -1,5 +1,5 @@
-telethon
-cryptg
+pyrogram
+tgcrypto
 dnspython
 pymongo
 requests
