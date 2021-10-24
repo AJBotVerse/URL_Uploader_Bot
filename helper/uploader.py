@@ -52,5 +52,6 @@ class Upload:
         else:
             await self.bot.delete_messages(self.userid, self.msg_id)
         finally:
+            task("No Task")
             remove(self.filename)
 
