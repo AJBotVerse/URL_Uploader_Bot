@@ -43,7 +43,8 @@ class Upload:
         try:
             global t1
             t1 = time()
-            await self.bot.send_document(self.userid , document = self.filename, reply_to_message_id = self.msg_id, progress = uploadingProgress)
+            # await self.bot.send_document(self.userid , document = self.filename, reply_to_message_id = self.msg_id, progress = uploadingProgress)
+            await self.bot.send_document(self.userid , document = self.filename, reply_to_message_id = self.msg_id)
         except Exception as e:
             await self.bot.delete_messages(self.userid, self.old_msg.message_id)
             await self.bot.send_message(self.userid, BotMessage.unsuccessful_upload, reply_to_message_id  = self.msg_id)
