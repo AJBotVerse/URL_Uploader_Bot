@@ -36,7 +36,7 @@ class URLDL:
                 speed = downObj.get_speed(human=True)
                 remaining = downObj.get_eta(human=True)
                 percentage = int(downObj.get_progress()*100)
-                msg = await self.bot.edit_message_text(self.userid, msg.message_id, f"<b>Downloading... !! Keep patience...\n {progress_bar}\n📊Percentage: {percentage}\n✅Completed: {completed}\n🚀Speed: {speed}\n⌚️Remaining Time: {remaining}</b>", parse_mode = 'html')
+                msg = await self.bot.edit_message_text(self.userid, msg.message_id, f"<b>Downloading... !! Keep patience...\n {progress_bar}\n📊Percentage: {percentage} %\n✅Completed: {completed}\n🚀Speed: {speed}\n⌚️Remaining Time: {remaining}</b>", parse_mode = 'html')
                 sleep(3)
             try:
                 filename = downObj.get_dest()
