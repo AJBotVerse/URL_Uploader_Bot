@@ -3,8 +3,6 @@
 
 """Importing"""
 # Importing Inbuilt Packages
-from time import sleep
-from os import remove
 from re import match
 
 # Importing Developer defined Module
@@ -32,4 +30,3 @@ class Downloader:
             self.filename = urldownOBJ.filename
         return self
 
-    

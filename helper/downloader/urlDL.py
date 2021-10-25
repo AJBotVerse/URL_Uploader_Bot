@@ -23,9 +23,9 @@ class URLDL:
 
     async def start(self):
 
+        self.userid = self.update.chat.id
         len_file = await length_of_file(self.bot, self.url)
         if len_file == 'Valid':
-            self.userid = self.update.chat.id
             msg = await self.bot.edit_message_text(self.userid, self.process_msg_id, BotMessage.starting_to_download, parse_mode = 'html')
 
             downObj = SmartDL(self.url, dest = Config.DOWNLOAD_LOCATION)
