@@ -14,7 +14,7 @@ from helper.uploader import *
 fileName = 'uploadRequest'
 
 
-@Client.on_message(filters.private & filters.regex("^http?s:(.*)"))
+@Client.on_message(filters.private & filters.regex("^https?:(.*)"))
 async def upload_handler(bot, update):
     if await search_user_in_community(bot, update):
         if task() == "Running":
