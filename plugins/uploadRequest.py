@@ -14,20 +14,34 @@ from helper.uploader import *
 fileName = 'uploadRequest'
 
 
-@Client.on_message(filters.private & filters.regex("^https?:(.*)"))
+# Some Global Variable
+listTask = ['']
+global counter
+counter = 0
+
+
+@Client.on_message(filters.private & filters.regex("^http(s)?:(.*)"))
 async def upload_handler(bot, update):
     if await search_user_in_community(bot, update):
-        if task() == "Running":
-            await update.reply_text(BotMessage.task_ongoing, parse_mode = 'html')
-        else:
-            task("Running")
-            url = update.text
-            downloader = await Downloader.start(update, url, bot)
-            filename = downloader.filename
-
-            if filename:    #Sending file to user
-                msg = downloader.n_msg
-                message_id = update.message_id
-                uploader = Upload(bot, update, msg, filename)
-                await uploader.start()
+        global counter
+        counter += 1
+        listTask.append(Multitask(bot, update))
+        bot.loop.create_task(listTask[counter].start())
     return
+
+class Multitask:
+
+    def __init__(self, bot, update):
+        self.bot = bot
+        self.update = update
+
+    async def start(self):
+        url = self.update.text
+        downloader = await Downloader.start(self.update, url, self.bot)
+        filename = downloader.filename
+
+        if filename:    #Sending file to user
+            msg = downloader.n_msg
+            uploader = Upload(self.bot, self.update, msg, filename, downloader.downloadFolder)
+            await uploader.start()
+

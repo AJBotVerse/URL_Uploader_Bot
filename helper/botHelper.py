@@ -88,6 +88,8 @@ async def length_of_file(bot, url):
             return file_length
         else:   #File`s Size is in the Limit
             return 'Valid'
+    except TypeError:
+        return 'Not Valid'
     except Exception as e:  #File is not Exist in Given URL
         await bot.send_message(Config.OWNER_ID, line_number(fileName, e))
         return 'Not Valid'

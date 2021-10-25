@@ -28,5 +28,7 @@ class Downloader:
             if urldownOBJ.filename:
                 self.n_msg = urldownOBJ.n_msg
             self.filename = urldownOBJ.filename
+            self.downloadFolder = urldownOBJ.Downloadfolder
         return self
 
+    
