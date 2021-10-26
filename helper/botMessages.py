@@ -15,5 +15,8 @@ class BotMessage(object):
     uploading_msg = "<b>File successfully downloaded to server, Now uploading to Drive.</b>"
     file_limit = f"Send only those whose size is less than 400mb.{common_text}"
     youtube_url = "<b>Currently I do not support youtube videos.</b>"
-
+    addcommandinvaild = "<b>Send Userid also.</b>"
+    successfullyadded = f"<b>User added Successfully.</b>"
+    addingWentWrong = f"<b>Something went wrong user not added.</b>"
+    telegramLimit = f"It is more than limit of telegram."
     

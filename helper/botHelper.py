@@ -12,6 +12,7 @@ from requests import head
 import __main__
 from os import path
 from inspect import currentframe
+from datetime import date
 
 # Importing Credentials & Required Data
 from helper.botMessages import BotMessage
@@ -27,7 +28,8 @@ fileName = 'botHelper'
 '''Connecting To Database'''
 if mongoSTR:
     mongo_client = MongoClient(mongoSTR)
-    db_user = mongo_client['Pdisk_Uploader']
+    db_user = mongo_client['URL_Uploader']
+    premium_user = db_user['premiumUsers']
     collection_user = db_user['members']
 
 '''Defining Some Functions'''
@@ -64,33 +66,46 @@ def checking_user_in_db(userid):
         collection_user.insert_one(document)
     return
 
-#Task Updating or Status Checking
-def task(status=None):
-    if status:
-        with open('task.txt', 'w') as newfile:
-            newfile.writelines([status])
+# Adding premium users
+def addingPremiumUser(userid):
+    try:
+        premium_user.insert_one({
+            'userid' : userid,
+            'start' : f'{date.today()}'
+        })
+    except Exception as e:
+        return
     else:
-        try:
-            with open('task.txt') as file:
-                return file.readlines()[0]
-        except FileNotFoundError:
-            return "No Task"
+        return True
+
+# Verifying whether user is premium
+def isPremiumUser(userid):
+    if mongoSTR:
+        document = {'userid' : userid}
+        if premium_user.find_one(document):
+            return True
+    return
 
 #it will check the length of file
-async def length_of_file(bot, url):
+async def length_of_file(bot, url, userid):
     try:
         h = head(url, allow_redirects=True)
         header = h.headers
         content_length = int(header.get('content-length'))
         file_length = int(content_length/1048576)     #Getting Length of File
-        if content_length > 419430400:  #File`s Size is more than Limit 
-            # return 'Valid'
-            return file_length
-        else:   #File`s Size is in the Limit
-            return 'Valid'
     except TypeError:
         return 'Not Valid'
     except Exception as e:  #File is not Exist in Given URL
         await bot.send_message(Config.OWNER_ID, line_number(fileName, e))
         return 'Not Valid'
+    else:
+        if isPremiumUser(userid):
+            if content_length > 2147483648:  #File`s Size is more than Telegram Limit
+                return 'Telegram Limit'
+            return 'valid'
+        else:
+            if content_length > 419430400:  #File`s Size is more than Limit
+                return file_length
+            else:   #File`s Size is in the Limit
+                return 'Valid'
 

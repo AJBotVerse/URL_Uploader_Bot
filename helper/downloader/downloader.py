@@ -19,10 +19,10 @@ class Downloader:
     @classmethod
     async def start(cls, update, url, bot):
         self = cls(update, url, bot)
+        process_msg = await update.reply_text(BotMessage.processing_url, parse_mode = 'html')
         if match('^https://(www.)?youtu(.)?be(.com)?/(.*)', url):
             await update.reply_text(BotMessage.youtube_url, parse_mode = 'html')
         else:   #Normal Url
-            process_msg = await update.reply_text(BotMessage.processing_url, parse_mode = 'html')
             urldownOBJ = URLDL(update, process_msg, bot, url)
             await urldownOBJ.start()
             if urldownOBJ.filename:

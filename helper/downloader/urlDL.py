@@ -28,8 +28,8 @@ class URLDL:
 
     async def start(self):
 
-        len_file = await length_of_file(self.bot, self.url)
         self.userid = self.update.chat.id
+        len_file = await length_of_file(self.bot, self.url, self.userid)
         if len_file == 'Valid':
             msg = await self.bot.edit_message_text(self.userid, self.process_msg_id, BotMessage.starting_to_download, parse_mode = 'html')
 
@@ -61,11 +61,13 @@ class URLDL:
                         rmtree(f'{self.Downloadfolder}')
                     except Exception as e:
                         await self.bot.send_message(Config.OWNER_ID, line_number(fileName, e))
-                        await self.bot.delete_messages(self.userid, msg.id)
+                        await self.bot.delete_messages(self.userid, msg.message_id)
                         await self.bot.send_message(self.userid, BotMessage.unsuccessful_upload, parse_mode = 'html')
                     finally:
                         for e in downObj.get_errors():
                             await self.bot.send_message(Config.OWNER_ID, line_number(fileName, e))
+        elif len_file == 'Telegram Limit':
+            await self.bot.edit_message_text(self.userid, self.process_msg_id, BotMessage.telegramLimit, parse_mode = 'html')
         elif len_file == 'Not Valid':
             await self.bot.edit_message_text(self.userid, self.process_msg_id, BotMessage.unsuccessful_upload, parse_mode = 'html')
         else:
