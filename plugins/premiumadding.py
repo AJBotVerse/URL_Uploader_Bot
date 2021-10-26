@@ -7,7 +7,7 @@ from helper.importCommon import *
 
 
 #For Owner of Bot Only, Sent message to all Bot Users
-@Client.on_message(filters.chat(Config.OWNER_ID) & filters.regex("^/add"))
+@Client.on_message(filters.chat(Config.OWNER_ID) & filters.regex("^/add(.+)"))
 async def broadcast_handler(bot, update):
     try:
         #Extracting userid
