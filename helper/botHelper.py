@@ -81,7 +81,7 @@ def addingPremiumUser(userid):
 # Verifying whether user is premium
 def isPremiumUser(userid):
     if mongoSTR:
-        document = {'userid' : userid}
+        document = {'userid' : str(userid)}
         if premium_user.find_one(document):
             return True
     return
@@ -102,7 +102,7 @@ async def length_of_file(bot, url, userid):
         if isPremiumUser(userid):
             if content_length > 2147483648:  #File`s Size is more than Telegram Limit
                 return 'Telegram Limit'
-            return 'valid'
+            return 'Valid'
         else:
             if content_length > 419430400:  #File`s Size is more than Limit
                 return file_length

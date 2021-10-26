@@ -11,14 +11,17 @@ from helper.importCommon import *
 async def broadcast_handler(bot, update):
     try:
         #Extracting userid
-        userid = update.text.split('/add ')[1]
+        userid = str(update.text.split('/add ')[1])
     except IndexError:
         await update.reply_text(BotMessage.addcommandinvaild, parse_mode = 'html')
     except Exception as e:
         await bot.send_message(Config.OWNER_ID, line_number(fileName, e))
     else:
-        if addingPremiumUser(userid):
-            await update.reply_text(BotMessage.successfullyadded, parse_mode = 'html')
+        if userid.isdigit():
+            if addingPremiumUser(userid):
+                await update.reply_text(BotMessage.successfullyadded, parse_mode = 'html')
+            else:
+                await update.reply_text(BotMessage.addingWentWrong, parse_mode = 'html')
         else:
-            await update.reply_text(BotMessage.addingWentWrong, parse_mode = 'html')
+            await update.reply_text(BotMessage.addcommandinvaild, parse_mode = 'html')
 
