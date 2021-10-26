@@ -59,6 +59,5 @@ class Upload:
         else:
             await self.bot.delete_messages(self.userid, self.old_msg.message_id)
         finally:
-            task("No Task")
             rmtree(self.downloadFolder)
 
