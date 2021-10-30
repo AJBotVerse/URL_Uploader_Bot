@@ -29,7 +29,6 @@ fileName = 'botHelper'
 if mongoSTR:
     mongo_client = MongoClient(mongoSTR)
     db_user = mongo_client['URL_Uploader']
-    premium_user = db_user['premiumUsers']
     collection_user = db_user['members']
 
 '''Defining Some Functions'''
@@ -66,26 +65,6 @@ def checking_user_in_db(userid):
         collection_user.insert_one(document)
     return
 
-# Adding premium users
-def addingPremiumUser(userid):
-    try:
-        premium_user.insert_one({
-            'userid' : userid,
-            'start' : f'{date.today()}'
-        })
-    except Exception as e:
-        return
-    else:
-        return True
-
-# Verifying whether user is premium
-def isPremiumUser(userid):
-    if mongoSTR:
-        document = {'userid' : str(userid)}
-        if premium_user.find_one(document):
-            return True
-    return
-
 #it will check the length of file
 async def length_of_file(bot, url, userid):
     try:
@@ -99,13 +78,7 @@ async def length_of_file(bot, url, userid):
         await bot.send_message(Config.OWNER_ID, line_number(fileName, e))
         return 'Not Valid'
     else:
-        if isPremiumUser(userid):
-            if content_length > 2147483648:  #File`s Size is more than Telegram Limit
-                return 'Telegram Limit'
-            return 'Valid'
-        else:
-            if content_length > 419430400:  #File`s Size is more than Limit
-                return file_length
-            else:   #File`s Size is in the Limit
-                return 'Valid'
-
+        if content_length > 2097152000:  #File`s Size is more than Telegram Limit
+            return 'Telegram Limit'
+        return 'Valid'
+        

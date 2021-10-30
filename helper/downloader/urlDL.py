@@ -70,8 +70,6 @@ class URLDL:
             await self.bot.edit_message_text(self.userid, self.process_msg_id, BotMessage.telegramLimit, parse_mode = 'html')
         elif len_file == 'Not Valid':
             await self.bot.edit_message_text(self.userid, self.process_msg_id, BotMessage.unsuccessful_upload, parse_mode = 'html')
-        else:
-            await self.bot.edit_message_text(self.userid, self.process_msg_id, f'<b>This filesize is <i>{len_file}mb</i>.{BotMessage.file_limit}</b>', parse_mode = 'html')
 
         self.filename = None
         return
