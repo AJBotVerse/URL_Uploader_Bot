@@ -45,8 +45,7 @@ class Downloader:
         res = get(self.url)
         page = BeautifulSoup(res.content, 'html5lib')
         try:
-            scriptElement = page.find_all('script')[2]
-            scriptValue = str(scriptElement).split('<script> window.__INITIAL_STATE__= ')[1].split(';</script>')[0]
+            scriptValue = str(page.find_all('script')[2]).split('<script> window.__INITIAL_STATE__= ')[1].split(';</script>')[0]
             jsonDoc = loads(scriptValue)
             self.url = jsonDoc['infoData']['defaultUrl']
         except Exception as e:
