@@ -33,8 +33,8 @@ class Downloader:
             await self.rawLinkDownloader()
         return self
 
-    async def rawLinkDownloader(self):
-        urldownOBJ = URLDL(self.update, self.process_msg, self.bot, self.url)
+    async def rawLinkDownloader(self, customFileName = None):
+        urldownOBJ = URLDL(self.update, self.process_msg, self.bot, self.url, customFileName)
         await urldownOBJ.start()
         if urldownOBJ.filename:
             self.n_msg = urldownOBJ.n_msg
@@ -53,6 +53,14 @@ class Downloader:
             await self.bot.edit_message_text(self.userid, self.process_msg.message_id, BotMessage.unsuccessful_upload, parse_mode = 'html')
             return
         else:
-            await self.rawLinkDownloader()
+            try:
+                customFileName = str(page.find('p', {"class" : 'title text-ellipsis'}).contents[0])
+            except Exception as e:
+                customFileName = None
+            else:
+                if not match('(.+).(\w+)', customFileName):
+                    customFileName += '.mp4'
+            finally:
+                await self.rawLinkDownloader(customFileName)
         
         

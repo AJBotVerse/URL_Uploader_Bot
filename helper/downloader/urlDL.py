@@ -12,17 +12,18 @@ from helper.importCommon import *
 # Importing Inbuilt Packages
 from shutil import rmtree
 from time import sleep
-from os import makedirs
+from os import makedirs, rename
 from uuid import uuid4
 
 
 class URLDL:
 
-    def __init__(self, update, process_msg, bot, url):
+    def __init__(self, update, process_msg, bot, url, customFileName):
         self.update = update
         self.process_msg_id = process_msg.message_id
         self.bot = bot
         self.url = url
+        self.customFileName = customFileName
         self.Downloadfolder = f'{Config.DOWNLOAD_LOCATION}{str(uuid4())}'
         makedirs(self.Downloadfolder)
 
@@ -53,6 +54,9 @@ class URLDL:
                 await self.bot.edit_message_text(self.userid, msg.message_id, BotMessage.unsuccessful_upload, parse_mode = 'html')
             else:
                 if downObj.isSuccessful():
+                    if self.customFileName: # To use custom File names
+                        rename(filename, self.customFileName)
+                        filename = self.customFileName
                     n_msg = await self.bot.edit_message_text(self.userid, msg.message_id, BotMessage.uploading_msg, parse_mode = 'html')
                     self.n_msg, self.filename = n_msg, filename
                     return True
