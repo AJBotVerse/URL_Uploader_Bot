@@ -58,13 +58,7 @@ class Downloader:
             except Exception as e:
                 customFileName = None
             else:
-                a = match('(.+).(\w+)', customFileName)
-                print(customFileName)
-                print(a)
-                return
-                if not match('(.+).(\w+)', customFileName):
-                    customFileName += '.mp4'
-                    print(customFileName)
+                customFileName += '.mp4'
             finally:
                 await self.rawLinkDownloader(customFileName)
         
