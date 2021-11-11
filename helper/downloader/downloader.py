@@ -60,6 +60,7 @@ class Downloader:
             else:
                 if not match('(.+).(\w+)', customFileName):
                     customFileName += '.mp4'
+                    print(customFileName)
             finally:
                 await self.rawLinkDownloader(customFileName)
         

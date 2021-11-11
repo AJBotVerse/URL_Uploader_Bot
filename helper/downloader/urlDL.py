@@ -24,7 +24,7 @@ class URLDL:
         self.bot = bot
         self.url = url
         self.customFileName = customFileName
-        self.Downloadfolder = f'{Config.DOWNLOAD_LOCATION}{str(uuid4())}'
+        self.Downloadfolder = f'{Config.DOWNLOAD_LOCATION}{str(uuid4())}//'
         makedirs(self.Downloadfolder)
 
     async def start(self):
@@ -55,6 +55,7 @@ class URLDL:
             else:
                 if downObj.isSuccessful():
                     if self.customFileName: # To use custom File names
+                        self.customFileName = f'{self.Downloadfolder}{self.customFileName}'
                         rename(filename, self.customFileName)
                         filename = self.customFileName
                     n_msg = await self.bot.edit_message_text(self.userid, msg.message_id, BotMessage.uploading_msg, parse_mode = 'html')
