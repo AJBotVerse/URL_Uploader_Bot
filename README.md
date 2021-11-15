@@ -1,3 +1,13 @@
+# Repo Stats
+![Watchers](https://img.shields.io/github/watchers/AJTimePyro/URL_Uploader_Bot.svg?style=for-the-badge)
+![Contributors](https://img.shields.io/github/contributors/AJTimePyro/URL_Uploader_Bot?style=for-the-badge)
+![Repo Size](https://img.shields.io/github/repo-size/AJTimePyro/URL_Uploader_Bot?color=yellow&style=for-the-badge)
+[![Telegram Bot](https://img.shields.io/badge/Telegram-Bot-blue.svg?style=for-the-badge)](https://t.me/URL_UploaderAJ_Bot)
+![License](https://img.shields.io/github/license/AJTimePyro/URL_Uploader_Bot?style=for-the-badge)
+[![Bot Support](https://img.shields.io/badge/URL%20Support-Support%20Group-blue?style=for-the-badge)](https://t.me/AJPyroVerseGroup)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-blue.svg?style=for-the-badge)](https://t.me/AJPyroVerse)
+![Commit Activity](https://img.shields.io/github/commit-activity/m/AJTimePyro/URL_Uploader_Bot?style=for-the-badge)
+
 # URL Uploader Bot
 
 This is the source code of [URL Uploader Bot](https://t.me/URL_UploaderAJ_Bot).
